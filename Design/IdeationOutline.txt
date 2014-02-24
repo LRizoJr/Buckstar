@@ -1,0 +1,40 @@
+BUCKSTAR Coffee Stand 
+	- Similar to Lemonade Stand
+		Coffeee
+		Ingredients to make coffee
+		Recipes for variations
+		Weather-varying (affects customer's "wants")
+	- A few basic coffee types: Standard, Flavored, Iced
+	- Each coffee type has variations which can be researched (for $$$) to target specific customers
+		Each variation has its own set of ingredients that must be purchased (some more expensive than others)
+		Flavor Examples:
+			Standard - Decaf; With Milk;
+			Flavored - French Vanilla; Hazelnut;
+			Iced - Chocolate; Vanilla Bean; 
+	- Different customer types, each customer type has various attributes
+		Customer Types:
+			Preteens (Likes flavored, not much $$$)
+			Teenage Girls (Likes Flavored, Loves Iced, so-so $$$)
+			Executives (Likes Standard, Flavored and Iced but more advanced "variations", lots of $$$)
+		Attribute Examples:
+			Coffee Types - Likes/Dislikes (and "variations")
+			Wealth
+				from broke to rich 
+				this affects customer buying volume (whether they buy Small/Medium/Large/AMERICA-Sized)
+				also affects taste - they like fancier more expensive variations (which cost more to research & make)
+			Coffee-Addiction Level
+	- Additional game features:
+		During off-hours (end-of-day):
+			Buying ingredients for the next day (or week?)
+			Market research - pay to research certain customer's likes (or what's "hot" nowadays)
+			Statistics on day, performance, wealth, progression (or regression), upcoming weather reports, etc.
+		A competitor/rival: (DERP-HERP Coffee) 
+			AI-based
+			Progressively more difficult (will make mistakes initially with inventory quantities, weather adjustments, etc.)
+			Goal of the game is to buy out your competitor, achieve Coffee-Stand Monopoly (ASAP)
+			Works on the same rules as the player - must buy ingredients, research markets, etc.
+		Lines and Line Management
+			Need to hire (and pay for) additional staff to keep lines short
+			Customers will walk away to nearby competitor (DERP-HERP) if your lines are too long (or vice-versa!)
+			
+			

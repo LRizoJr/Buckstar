@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello" />
+	<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    android:text="test all of this text what happens when  I have a ton of text oh my god so much damn text" />
+</LinearLayout>

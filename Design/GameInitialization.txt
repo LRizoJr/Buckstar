@@ -1,0 +1,33 @@
+Initialization
+
+	1. Load the player data
+	2. Instantiate Passive Game Objects using enumerations and switch cases
+		-Ingredients
+		-Recipes
+		-Equipment
+		-Facilities
+		-Employees
+		
+
+	Enum IngredientType { Sugar, CoffeeBeans }
+	
+	List<IngredientType> ActiveIngredientsTypes = new List<IngredientType>(IngredientType.Sugar, IngredientType.Coffeebeans);	
+	
+	init()
+	{
+		initIngredients();
+		...
+		initRecipes();
+	}
+	
+	initIngredients()
+	{
+		foreach(Ingredient in ActiveIngredients)
+		{
+			switch(Ingredient)
+			{
+				case IngredientType.Sugar:
+					
+			}
+		}
+	}
