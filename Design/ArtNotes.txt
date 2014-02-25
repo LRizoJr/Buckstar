@@ -1,0 +1,71 @@
+BUCKSTAR Art
+
+WORLD VIEW
+
+1 venue
+
+1 elevation 2d but with background
+   A counter inside a truck like space
+   With a coffee machine visible
+   Counter should have enough
+   Space for two baristas
+
+Background
+  Park or open not city like yet
+
+Coffee truck
+  Should have a logo and color
+  Scheme
+
+Baristas
+  Uniform and actual character
+  Front view only no frames
+
+Standing menu
+   Menu should be on the counter
+   Stand alone
+   Enough space for 3 items
+
+Customer Types
+   6 frames for the walking animation
+   Empty handed and with coffee in
+   Hand
+   One of them waiting in like 3
+   Frames like tapping foot or
+   Crossed arms
+   Back view of the customers
+   Front view
+   Side view
+   Pop up reaction level
+         Ecstatic
+         Happy
+         Ok
+         Sad
+
+Tips jar
+    To be on the counter
+
+
+HUD VIEW
+
+- Day count
+
+- Dollar amount of sales of the day
+
+- Time and Date
+
+- Coffee sold count
+
+- Current weather conditions
+   Degrees and rain or bad weather
+   percentage
+   Weather icons for all the types
+
+- Icons for all the ingredients
+   Coffee beans
+   Sugar
+   Ice
+   Syrup(s)
+     Chocolate
+     Caramel
+     French vanilla
