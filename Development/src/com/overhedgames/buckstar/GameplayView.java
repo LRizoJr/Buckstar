@@ -2,6 +2,8 @@ package com.overhedgames.buckstar;
 
 import java.util.ArrayList;
 
+import com.overhedgames.buckstar.enums.FacilityType;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +21,7 @@ public class GameplayView extends SurfaceView implements Callback {
 	private BuckstarMainThread mainThread;
 	
 	private ArrayList<Customer> customers;
+	private Facility facility;
 	
 	public GameplayView(Context context) {
 		super(context);
@@ -53,7 +56,7 @@ public class GameplayView extends SurfaceView implements Callback {
 		//when the surface is created, we can safely start our main loop
 		mainThread.setRunning(true);
 		mainThread.start(); // invoke start of main loop
-		
+		this.facility = initFacility();
 		addCustomer();
 		
 	}
@@ -71,6 +74,12 @@ public class GameplayView extends SurfaceView implements Callback {
 				// try again
 			}
 		}
+	}
+	
+	private Facility initFacility()
+	{
+		Facility coffeeTruck = new Facility(FacilityType.CoffeeTruck);		
+		return coffeeTruck;				
 	}
 	
 	private void addCustomer() {

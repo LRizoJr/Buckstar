@@ -12,10 +12,13 @@ import com.overhedgames.buckstar.enums.DrinkType;
 import com.overhedgames.buckstar.enums.CustomerState;
 
 public class Customer extends GameObject {
+	private static final CustomerState DEF_STATE = CustomerState.Browsing;
+	
 	private AttributeLevel menuSatisfaction;
 	private AttributeLevel purchaseSatisfaction;
 	private AttributeLevel wealth;
 	private ArrayList<AbstractMap<DrinkType, AttributeLevel>> drinkTypeRatings;
+	private FacilityInfo facilityInfo;
 	
 	private long waitTime;	
 	private long maxWaitTime;
@@ -25,13 +28,14 @@ public class Customer extends GameObject {
 	public Customer(Bitmap[] animationBitmaps, Point location, Speed speed, 
 			Boolean isAnimating, int animationFPS, 
 			ArrayList<AbstractMap<DrinkType, AttributeLevel>> drinkTypeRatings,
+			FacilityInfo facilityInfo,
 			long maxWaitTime) {
 		super(animationBitmaps, location, speed, isAnimating, animationFPS);
 		
 		this.drinkTypeRatings = drinkTypeRatings;
 		this.maxWaitTime = maxWaitTime;
-		this.currentState = CustomerState.Waiting;	// default initial state
-		
+		this.currentState = Customer.DEF_STATE;	// default initial state
+		this.facilityInfo = facilityInfo;
 	}			
 	
 	public void update() {

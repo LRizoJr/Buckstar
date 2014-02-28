@@ -1,7 +1,7 @@
 package com.overhedgames.buckstar.enums;
 
 public enum FacilityType { 
-	CoffeeStand, 
+	CoffeeTruck, 
 	StripmallCoffeeShop, 
 	CampusCoffeeShop, 
 	MallCoffeeShop,
