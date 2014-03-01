@@ -1,11 +1,10 @@
 package com.overhedgames.buckstar;
 
 import java.util.ArrayList;
-import java.util.AbstractMap;
 
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.widget.SimpleExpandableListAdapter;
+import android.util.Pair;
 
 import com.overhedgames.buckstar.enums.AttributeLevel;
 import com.overhedgames.buckstar.enums.DrinkType;
@@ -17,19 +16,17 @@ public class Customer extends GameObject {
 	private AttributeLevel menuSatisfaction;
 	private AttributeLevel purchaseSatisfaction;
 	private AttributeLevel wealth;
-	private ArrayList<AbstractMap<DrinkType, AttributeLevel>> drinkTypeRatings;
-	private FacilityInfo facilityInfo;
+	private ArrayList<Pair<DrinkType, AttributeLevel>> drinkTypeRatings;
+	private CustomerFacilityInfo facilityInfo;
 	
 	private long waitTime;	
 	private long maxWaitTime;
 	
 	private CustomerState currentState;
 	
-	public Customer(Bitmap[] animationBitmaps, Point location, Speed speed, 
-			Boolean isAnimating, int animationFPS, 
-			ArrayList<AbstractMap<DrinkType, AttributeLevel>> drinkTypeRatings,
-			FacilityInfo facilityInfo,
-			long maxWaitTime) {
+	public Customer(Bitmap[] animationBitmaps, Point location, Speed speed,  Boolean isAnimating, int animationFPS, 
+			ArrayList<Pair<DrinkType, AttributeLevel>> drinkTypeRatings, CustomerFacilityInfo facilityInfo, long maxWaitTime) {
+		
 		super(animationBitmaps, location, speed, isAnimating, animationFPS);
 		
 		this.drinkTypeRatings = drinkTypeRatings;
