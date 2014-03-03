@@ -1,5 +1,7 @@
 package com.overhedgames.buckstar;
 
+import com.overhedgames.buckstar.parameters.Parameters_Facility;
+
 import android.app.Activity;
 import android.util.Log;
 import android.view.Window;
@@ -18,6 +20,7 @@ public class BuckStarActivity extends Activity {
         
         Log.d(this.TAG, "test");
         this.setContentView(new GameplayView(this));
+        init();
         Log.d(this.TAG, "View added");
     }
     
@@ -31,5 +34,10 @@ public class BuckStarActivity extends Activity {
     protected void onStop() {
     	Log.d(BuckStarActivity.TAG, "Stopping...");
     	super.onStop();
+    }
+    
+    private void init() {
+    
+    	Parameters_Facility.Context = this;
     }
 }

@@ -9,7 +9,7 @@ public class GameObject {
 	private Point currentLocation;
 	private Point targetLocation;
 	
-	private Bitmap[] animationBitmaps;
+	protected Bitmap[] animationBitmaps;
 	private int currentBitmapIndex;
 	private Boolean isAnimating;
 		
@@ -18,6 +18,19 @@ public class GameObject {
 		
 	private Speed speed;
 	
+	public GameObject(Point location) { 
+		this.currentLocation = location;
+		this.isAnimating = false;
+		this.init(0);
+	}
+	
+	public GameObject(Bitmap objectBitmap, Point location) {
+		this.animationBitmaps = new Bitmap[] { objectBitmap };
+		this.currentLocation = location;
+		this.isAnimating = false;
+		
+		this.init(0);
+	}
 	public GameObject(Bitmap[] animationBitmaps, Point location, Speed speed, 
 					Boolean isAnimating, int animationFPS) {
 		this.animationBitmaps = animationBitmaps;
@@ -25,18 +38,23 @@ public class GameObject {
 		this.speed = speed;
 		this.isAnimating = isAnimating;		
 		
-		this.currentBitmapIndex = 0;
-		if(animationFPS == 0) {
-			animationFPS = GameObject.DEF_ANIMATION_FPS;  
-		}
-		this.framePeriod = 1000 / animationFPS;
-		this.frameTicker = 1;
+		init(animationFPS);
 	}
 	
 	public GameObject(Bitmap[] animationBitmaps, Point location, Speed speed, 
 					Boolean isAnimating, int animationFPS, Point targetLocation) {
 		this(animationBitmaps, location, speed, isAnimating, animationFPS);
 		this.targetLocation = targetLocation;
+	}
+	
+	private void init(int animationFPS) {
+		this.currentBitmapIndex = 0;
+		if(animationFPS == 0) {
+			animationFPS = GameObject.DEF_ANIMATION_FPS;  
+		}
+		
+		this.framePeriod = 1000 / animationFPS;
+		this.frameTicker = 1;		
 	}
 	
 	public void update() {

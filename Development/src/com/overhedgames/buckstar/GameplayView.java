@@ -20,31 +20,26 @@ public class GameplayView extends SurfaceView implements Callback {
 	
 	private BuckstarMainThread mainThread;
 	
-	private ArrayList<Customer> customers;
 	private Facility facility;
 	
 	public GameplayView(Context context) {
 		super(context);
 		this.getHolder().addCallback(this);
 		this.mainThread = new BuckstarMainThread(this.getHolder(), this);
-		this.customers = new ArrayList<Customer>();
+		this.facility = new Facility(FacilityType.CoffeeTruck);
 		this.setFocusable(true);
 		
 	}
 	
 	public void update() {
-		// update customers
-		for(int i = 0; i < this.customers.size(); i++) {
-			this.customers.get(i).update();
-		}
+		// update
+		this.facility.update();
 	}
 	
 	public void render(Canvas canvas) {
 		canvas.drawColor(Color.BLACK);		
 		// render customers		
-		for(int i = 0; i < this.customers.size(); i++) { 
-			this.customers.get(i).render(canvas);
-		}
+		this.facility.render(canvas);
 	}
 
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
@@ -56,9 +51,7 @@ public class GameplayView extends SurfaceView implements Callback {
 		//when the surface is created, we can safely start our main loop
 		mainThread.setRunning(true);
 		mainThread.start(); // invoke start of main loop
-		this.facility = initFacility();
-		addCustomer();
-		
+		this.facility = initFacility();				
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {
@@ -82,18 +75,4 @@ public class GameplayView extends SurfaceView implements Callback {
 		return coffeeTruck;				
 	}
 	
-	private void addCustomer() {
-		Bitmap animationImages[] = new Bitmap[3];
-		
-		animationImages[0] = BitmapFactory.decodeResource(this.getResources(), R.drawable.person1);
-		animationImages[1] = BitmapFactory.decodeResource(this.getResources(), R.drawable.person2);
-		animationImages[2] = BitmapFactory.decodeResource(this.getResources(), R.drawable.person3);
-		
-		Point loc = new Point(200,600);
-		
-		Speed speed = new Speed(1, 1);
-		
-		Customer c = new Customer(animationImages, loc, speed, false, 0, null, 250);
-		this.customers.add(c);
-	}
 }

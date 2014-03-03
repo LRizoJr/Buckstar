@@ -23,7 +23,7 @@ public class CoffeeDrink extends Buyable {
 				totalCost += requiredIngredients.get(i).cost;			
 			}
 		} catch(Exception ex) {
-			Log.d(this.TAG, "Exception caught while tryingt to calculate cost. Details: " + ex.getMessage());
+			Log.d(this.TAG, "Exception caught while trying to calculate cost. Details: " + ex.getMessage());
 		}
 		return totalCost;
 	}

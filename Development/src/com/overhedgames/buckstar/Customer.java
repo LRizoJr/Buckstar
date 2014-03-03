@@ -7,11 +7,13 @@ import android.graphics.Point;
 import android.util.Pair;
 
 import com.overhedgames.buckstar.enums.AttributeLevel;
+import com.overhedgames.buckstar.enums.CustomerType;
 import com.overhedgames.buckstar.enums.DrinkType;
 import com.overhedgames.buckstar.enums.CustomerState;
+import com.overhedgames.buckstar.parameters.Parameters_Customer;
 
 public class Customer extends GameObject {
-	private static final CustomerState DEF_STATE = CustomerState.Browsing;
+	private CustomerType custType;
 	
 	private AttributeLevel menuSatisfaction;
 	private AttributeLevel purchaseSatisfaction;
@@ -24,18 +26,45 @@ public class Customer extends GameObject {
 	
 	private CustomerState currentState;
 	
-	public Customer(Bitmap[] animationBitmaps, Point location, Speed speed,  Boolean isAnimating, int animationFPS, 
-			ArrayList<Pair<DrinkType, AttributeLevel>> drinkTypeRatings, CustomerFacilityInfo facilityInfo, long maxWaitTime) {
+	public Customer(CustomerType custType, Point location, Boolean isAnimating, CustomerFacilityInfo facilityInfo) {
 		
-		super(animationBitmaps, location, speed, isAnimating, animationFPS);
+		super(Parameters_Customer.getAnimationBitmaps(custType), location, Parameters_Customer.CUSTOMER_SPEED, 
+				isAnimating, Parameters_Customer.CUSTOMER_FPS);
 		
-		this.drinkTypeRatings = drinkTypeRatings;
-		this.maxWaitTime = maxWaitTime;
-		this.currentState = Customer.DEF_STATE;	// default initial state
-		this.facilityInfo = facilityInfo;
+		init(custType, facilityInfo);
+		
 	}			
-	
-	public void update() {
+	private void init(CustomerType custType, CustomerFacilityInfo facilityInfo) {
+		try {
+			switch(custType) {
+				case Adult:
+					this.maxWaitTime = Parameters_Customer.CUSTOMER_ADULT_MAX_WAIT_TIME;
+					break;
+				case Elderly:
+					//@todo
+					break;
+				case Executive:
+					//@todo
+					break;
+				case Kid:
+					//@todo
+					break;
+				case Teenager:
+					//@todo
+					break;
+				default:
+					//@todo
+					break;
+			}
+			this.drinkTypeRatings = Parameters_Customer.getCustDrinkTypeRatings(custType);						
+			this.facilityInfo = facilityInfo;
+			this.custType = custType;
+			this.currentState = Parameters_Customer.CUSTOMER_DEFAULT_STATE;	// default initial state			
+		}catch(Exception ex) { 
+			// @todo
+		}
+	}
+	public void update(CustomerFacilityInfo facilityInfo) {
 		switch(currentState) {
 			case Browsing:
 				// @todo 
@@ -46,7 +75,7 @@ public class Customer extends GameObject {
 				break;
 			case Waiting:
 				waitTime++;
-				if(waitTime > maxWaitTime) {
+				if(this.waitTime > this.maxWaitTime) {
 					this.currentState = CustomerState.Leaving;
 				}
 				break;
