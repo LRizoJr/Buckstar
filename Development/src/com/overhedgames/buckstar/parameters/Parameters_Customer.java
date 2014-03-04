@@ -13,7 +13,7 @@ import android.util.Pair;
 import com.overhedgames.buckstar.enums.*;
 
 public final class Parameters_Customer {
-	private static Activity Context; 
+	public static Activity Context; 
 	private final static int CUSTOMER_SPEED_X = 5;
 	private final static int CUSTOMER_SPEED_Y = 5;
 	private final static int CUSTOMER_BITMAP_FRAMES = 6;

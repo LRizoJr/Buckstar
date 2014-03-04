@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
@@ -25,15 +26,30 @@ public class GameplayView extends SurfaceView implements Callback {
 	public GameplayView(Context context) {
 		super(context);
 		this.getHolder().addCallback(this);
-		this.mainThread = new BuckstarMainThread(this.getHolder(), this);
-		this.facility = new Facility(FacilityType.CoffeeTruck);
+		this.mainThread = new BuckstarMainThread(this.getHolder(), this);		
 		this.setFocusable(true);
-		
+		init();
+	}
+	
+	private void init() {
+		try {
+			this.facility = new Facility(getContext(), FacilityType.CoffeeTruck);
+		}catch(Exception ex) { 
+			Log.d(this.TAG, "Exception caught in init: " + ex.toString());
+		}				
 	}
 	
 	public void update() {
-		// update
-		this.facility.update();
+		// update		
+		try {
+			if(this.facility == null) {
+				Log.d(this.TAG, "Exception: facility is null");
+			}
+			this.facility.update();
+		} catch(Exception ex) { 
+			Log.d(this.TAG, "Exception caught in GameplayViewUpdate: " + ex.toString());
+			
+		}
 	}
 	
 	public void render(Canvas canvas) {
@@ -47,11 +63,11 @@ public class GameplayView extends SurfaceView implements Callback {
 		
 	}
 
-	public void surfaceCreated(SurfaceHolder arg0) {
+	public void surfaceCreated(SurfaceHolder arg0) {		
 		//when the surface is created, we can safely start our main loop
+		Log.d(this.TAG, "Surface created");
 		mainThread.setRunning(true);
-		mainThread.start(); // invoke start of main loop
-		this.facility = initFacility();				
+		mainThread.start(); // invoke start of main loop						
 	}
 
 	public void surfaceDestroyed(SurfaceHolder arg0) {
@@ -68,11 +84,4 @@ public class GameplayView extends SurfaceView implements Callback {
 			}
 		}
 	}
-	
-	private Facility initFacility()
-	{
-		Facility coffeeTruck = new Facility(FacilityType.CoffeeTruck);		
-		return coffeeTruck;				
-	}
-	
 }

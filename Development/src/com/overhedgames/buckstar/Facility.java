@@ -2,10 +2,12 @@ package com.overhedgames.buckstar;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
 
@@ -13,6 +15,9 @@ import com.overhedgames.buckstar.enums.*;
 import com.overhedgames.buckstar.parameters.*;
 
 public class Facility extends GameObject {
+	private static final String TAG = Facility.class.getSimpleName();
+	
+	private Context context;
 	private double dailyRent;
 	private int employeeCapacity;
 	private FacilityType facilityType;
@@ -21,16 +26,21 @@ public class Facility extends GameObject {
 	private ArrayList<CustomerTypeFrequency> custTypeFrequency;
 	private ArrayList<Customer> customers;
 	
-	public Facility(FacilityType type) {
+	public Facility(Context context, FacilityType type) {
 		super(new Point(0,0));
+		this.context = context;
 		this.facilityType = type;
 		init(type);
 	}
 	
 	private void init(FacilityType type) {
 		switch(facilityType) {				
-			case CoffeeTruck:
-				this.animationBitmaps = new Bitmap [] { Parameters_Facility.COFFEE_TRUCK_BITMAP };
+			case CoffeeTruck:				
+				Bitmap scaledBitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(this.context.getResources(), 
+																						Parameters_Facility.COFFEE_TRUCK_BITMAP_ID), 
+																						1080, 1920, false);
+				
+				this.animationBitmaps = new Bitmap [] { scaledBitmap };				
 				this.dailyRent = Parameters_Facility.COFFEE_TRUCK_DAILY_RENT;
 				this.employeeCapacity = Parameters_Facility.COFFEE_TRUCK_EMPLOYEE_CAPACITY;	
 				this.facilityInfo = new CustomerFacilityInfo(new ArrayList<Customer>(), new ArrayList<CoffeeDrink>(), 
@@ -47,6 +57,7 @@ public class Facility extends GameObject {
 			default:
 				break;
 		}
+		this.customers = new ArrayList<Customer>();
 		this.custTypeFrequency = Facility.generateCustTypeFrequency(facilityType);
 	}
 	
@@ -67,18 +78,18 @@ public class Facility extends GameObject {
 				this.customers.get(i).update(this.facilityInfo);
 			}
 		}catch(Exception ex) {
-			
+			Log.d(this.TAG, "Exception caught in update method: " + ex.toString());
 		}
 	}
 	
 	public void render(Canvas canvas) {
-		try {
+		try {			
 			super.render(canvas);
 			for(int i = 0; i < this.customers.size(); i++) { 
 				this.customers.get(i).render(canvas);				
 			}
 		}catch(Exception ex) {
-			
+			//@todo
 		}		
 	}
 	

@@ -2,6 +2,8 @@ package com.overhedgames.buckstar;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Point;
 
 public class GameObject {
@@ -81,10 +83,11 @@ public class GameObject {
 	
 	public void render(Canvas canvas) {
 		if(animationBitmaps.length > 0) {
-			canvas.drawBitmap(animationBitmaps[currentBitmapIndex],
-						currentLocation.x - (animationBitmaps[currentBitmapIndex].getWidth() / 2),
-						currentLocation.y - (animationBitmaps[currentBitmapIndex].getHeight() / 2),
-						null);			
+			//canvas.drawBitmap(animationBitmaps[currentBitmapIndex],
+				//		currentLocation.x - (animationBitmaps[currentBitmapIndex].getWidth() / 2),
+					//	currentLocation.y - (animationBitmaps[currentBitmapIndex].getHeight() / 2),
+						//null);
+			canvas.drawBitmap(animationBitmaps[currentBitmapIndex], currentLocation.x,  currentLocation.y, null);
 		}
 	}
 	

@@ -69,8 +69,17 @@ public class Customer extends GameObject {
 			case Browsing:
 				// @todo 
 				// check current facility for location of menu, set as targetLoc
-				// once at loc, process menu options
-				// hold for a few seconds (5 sec or so)
+				if(this.getTargetLocation() == null) {
+					this.setTargetLocation(this.facilityInfo.getMenuLocation());
+				} else if(this.getCurrentLocation() == this.getTargetLocation()) {
+					// once at loc, process menu options
+					// hold for a few seconds (5 sec or so)
+					//@todo menu options check
+					if(true) {
+						this.currentState = CustomerState.Waiting;
+					}
+				}
+				
 				// change state to Leaving or Waiting depending on menu choices avail
 				break;
 			case Waiting:
@@ -83,7 +92,7 @@ public class Customer extends GameObject {
 				break;
 			case Leaving:
 				if(this.getTargetLocation() == null) {
-					this.setTargetLocation(new Point(500,600));
+					this.setTargetLocation(this.facilityInfo.getExitLocation());
 					this.setIsAnimating(true);
 				} else if (this.getTargetLocation().equals(this.getCurrentLocation())) {
 					this.setIsAnimating(false);

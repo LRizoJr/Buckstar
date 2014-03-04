@@ -1,5 +1,7 @@
 package com.overhedgames.buckstar;
 
+import com.overhedgames.buckstar.enums.CustomerState;
+import com.overhedgames.buckstar.parameters.Parameters_Customer;
 import com.overhedgames.buckstar.parameters.Parameters_Facility;
 
 import android.app.Activity;
@@ -36,8 +38,9 @@ public class BuckStarActivity extends Activity {
     	super.onStop();
     }
     
-    private void init() {
-    
-    	Parameters_Facility.Context = this;
+    private void init() {    
+    	//Parameters_Facility.Context = this;
+    	Parameters_Customer.Context = this;
+    	
     }
 }
