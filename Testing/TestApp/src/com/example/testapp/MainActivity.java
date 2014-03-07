@@ -28,7 +28,7 @@ public class MainActivity extends Activity   {
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				TestImageView i = (TestImageView) arg0.findViewById(R.id.imageView1);
 				TextView t = (TextView) arg0.findViewById(R.id.lblCurrentView);
-				t.setText("Layout: " + i.getCurrentImageName());
+				t.setText("Layout: " + i.getCurrentImageName() + " Point: " + arg1.getX() + ", " + arg1.getY());
 				t.bringToFront();
 				return false;
 			}

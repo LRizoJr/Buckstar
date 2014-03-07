@@ -19,10 +19,9 @@ public class BuckStarActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        
-        Log.d(this.TAG, "test");
-        this.setContentView(new GameplayView(this));
         init();
+        Log.d(this.TAG, "test");
+        this.setContentView(new GameplayView(this));        
         Log.d(this.TAG, "View added");
     }
     
@@ -39,8 +38,7 @@ public class BuckStarActivity extends Activity {
     }
     
     private void init() {    
-    	//Parameters_Facility.Context = this;
-    	Parameters_Customer.Context = this;
-    	
+    	Parameters_Facility.context = this;
+    	Parameters_Customer.context = this;    
     }
 }

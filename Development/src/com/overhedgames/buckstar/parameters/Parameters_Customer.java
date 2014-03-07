@@ -13,14 +13,14 @@ import android.util.Pair;
 import com.overhedgames.buckstar.enums.*;
 
 public final class Parameters_Customer {
-	public static Activity Context; 
+	public static Activity context; 
 	private final static int CUSTOMER_SPEED_X = 5;
 	private final static int CUSTOMER_SPEED_Y = 5;
 	private final static int CUSTOMER_BITMAP_FRAMES = 6;
 	public final static Speed CUSTOMER_SPEED = new Speed(Parameters_Customer.CUSTOMER_SPEED_X,Parameters_Customer.CUSTOMER_SPEED_Y);
-	public static final int CUSTOMER_FPS = 30;
+	public static final int CUSTOMER_FPS = 15;
 	public static final CustomerState CUSTOMER_DEFAULT_STATE = CustomerState.Browsing;
-	public static final int CUSTOMER_ADULT_MAX_WAIT_TIME = 60;
+	public static final int CUSTOMER_ADULT_MAX_WAIT_TIME = 75;
 	
 	public static ArrayList<Pair<DrinkType, AttributeLevel>> getCustDrinkTypeRatings(CustomerType custType) { 
 		ArrayList<Pair<DrinkType, AttributeLevel>> drinkTypeRatings = new ArrayList<Pair<DrinkType,AttributeLevel>>();
@@ -54,12 +54,12 @@ public final class Parameters_Customer {
 		try {
 			switch(custType) {
 				case Adult:
-						custBitmaps[0] = BitmapFactory.decodeResource(Context.getResources(), R.drawable.person1);
-						custBitmaps[1] = BitmapFactory.decodeResource(Context.getResources(), R.drawable.person1);
-						custBitmaps[2] = BitmapFactory.decodeResource(Context.getResources(), R.drawable.person2);
-						custBitmaps[3] = BitmapFactory.decodeResource(Context.getResources(), R.drawable.person2);
-						custBitmaps[4] = BitmapFactory.decodeResource(Context.getResources(), R.drawable.person3);
-						custBitmaps[5] = BitmapFactory.decodeResource(Context.getResources(), R.drawable.person3);
+						custBitmaps[0] = BitmapFactory.decodeResource(context.getResources(), R.drawable.person1);
+						custBitmaps[1] = BitmapFactory.decodeResource(context.getResources(), R.drawable.person1);
+						custBitmaps[2] = BitmapFactory.decodeResource(context.getResources(), R.drawable.person2);
+						custBitmaps[3] = BitmapFactory.decodeResource(context.getResources(), R.drawable.person2);
+						custBitmaps[4] = BitmapFactory.decodeResource(context.getResources(), R.drawable.person3);
+						custBitmaps[5] = BitmapFactory.decodeResource(context.getResources(), R.drawable.person3);
 					break;
 				case Elderly:
 					break;

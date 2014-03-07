@@ -1,5 +1,7 @@
 package com.overhedgames.buckstar;
 
+import com.overhedgames.buckstar.enums.Direction;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -21,14 +23,14 @@ public class GameObject {
 	private Speed speed;
 	
 	public GameObject(Point location) { 
-		this.currentLocation = location;
+		this.setCurrentLocation(location);
 		this.isAnimating = false;
 		this.init(0);
 	}
 	
 	public GameObject(Bitmap objectBitmap, Point location) {
 		this.animationBitmaps = new Bitmap[] { objectBitmap };
-		this.currentLocation = location;
+		this.setCurrentLocation(location);
 		this.isAnimating = false;
 		
 		this.init(0);
@@ -36,7 +38,7 @@ public class GameObject {
 	public GameObject(Bitmap[] animationBitmaps, Point location, Speed speed, 
 					Boolean isAnimating, int animationFPS) {
 		this.animationBitmaps = animationBitmaps;
-		this.currentLocation = location;
+		this.setCurrentLocation(location);
 		this.speed = speed;
 		this.isAnimating = isAnimating;		
 		
@@ -91,6 +93,13 @@ public class GameObject {
 		}
 	}
 	
+	private void setCurrentLocation(Point p) {
+		if(p == null) {
+			this.currentLocation = null;
+		} else {
+			this.currentLocation = new Point(p.x, p.y);		
+		}
+	}
 	public Point getCurrentLocation() {
 		return this.currentLocation;
 	}
@@ -111,9 +120,24 @@ public class GameObject {
 		this.isAnimating = isAnimating;
 	}
 	
-	public void setTargetLocation(Point target) {
-		if(target != null) {
-			this.targetLocation = target;
-		}
+	public void setTargetLocation(Point target) {		
+			if(target == null) {
+				this.targetLocation = null;
+			} else {
+				this.targetLocation = new Point(target.x, target.y);	
+			}
+			if(this.targetLocation != null) {
+				if(this.targetLocation.x < this.currentLocation.x) {
+					this.speed.setxDirection(Direction.Left);				
+				} else {
+					this.speed.setxDirection(Direction.Right);
+				}
+				
+				if(this.targetLocation.y < this.currentLocation.y) {
+					this.speed.setyDirection(Direction.Up);
+				} else {
+					this.speed.setyDirection(Direction.Down);
+				}							
+			}
 	}
 }
