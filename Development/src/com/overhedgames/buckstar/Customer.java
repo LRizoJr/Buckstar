@@ -3,18 +3,24 @@ package com.overhedgames.buckstar;
 import java.util.ArrayList;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.util.Log;
 import android.util.Pair;
 
 import com.overhedgames.buckstar.enums.AttributeLevel;
 import com.overhedgames.buckstar.enums.CustomerType;
+import com.overhedgames.buckstar.enums.Direction;
 import com.overhedgames.buckstar.enums.DrinkType;
 import com.overhedgames.buckstar.enums.CustomerState;
+import com.overhedgames.buckstar.globals.ApplicationData;
 import com.overhedgames.buckstar.parameters.Parameters_Customer;
 
 public class Customer extends GameObject {
 	private static String TAG = Customer.class.getSimpleName();
+	
+	private int facingDirection = Direction.Left;
 	
 	private CustomerType custType;
 	
@@ -58,11 +64,12 @@ public class Customer extends GameObject {
 				default:
 					//@todo
 					break;
-			}
+			}			
 			this.drinkTypeRatings = Parameters_Customer.getCustDrinkTypeRatings(custType);						
 			this.facilityInfo = facilityInfo;
 			this.custType = custType;
-			this.currentState = Parameters_Customer.CUSTOMER_DEFAULT_STATE;	// default initial state			
+			this.currentState = Parameters_Customer.CUSTOMER_DEFAULT_STATE;	// default initial state
+			this.facingDirection = Parameters_Customer.getCustomerFacingDirection(this.getCurrentLocation());
 		}catch(Exception ex) { 
 			// @todo
 		}
@@ -79,9 +86,11 @@ public class Customer extends GameObject {
 					// once at loc, process menu options
 					// hold for a few seconds (5 sec or so)
 					//@todo menu options check
-					this.setTargetLocation(null);
+					
+					this.setTargetLocation(null);			// reset target location
 					if(true) {
 						this.currentState = CustomerState.Waiting;
+						this.waitTime = 0;
 						this.setIsAnimating(false);
 					}
 				}
@@ -102,6 +111,7 @@ public class Customer extends GameObject {
 				if(this.getTargetLocation() == null) {
 					this.setTargetLocation(this.facilityInfo.getExitLocation());
 					this.setIsAnimating(true);
+					this.facingDirection = Direction.Right;
 				} else if (this.getTargetLocation().equals(this.getCurrentLocation())) {
 					this.setIsAnimating(false);
 				}
@@ -110,5 +120,26 @@ public class Customer extends GameObject {
 		
 		super.update();
 	}
+	
+	@Override
+	public void render(Canvas canvas) {
+		if(animationBitmaps.length > 0) {
+			//canvas.drawBitmap(animationBitmaps[currentBitmapIndex],
+				//		currentLocation.x - (animationBitmaps[currentBitmapIndex].getWidth() / 2),
+					//	currentLocation.y - (animationBitmaps[currentBitmapIndex].getHeight() / 2),
+						//null);
+			
+			if(this.facingDirection == Direction.Right) { 
+				canvas.drawBitmap(animationBitmaps[currentBitmapIndex], currentLocation.x,  currentLocation.y, null);
+			} else {
+				Matrix m = new Matrix();
+				m.setScale(-1, 1);
+				m.postTranslate(animationBitmaps[currentBitmapIndex].getWidth(), 0);
+				m.postTranslate(this.currentLocation.x, this.currentLocation.y);
+				canvas.drawBitmap(animationBitmaps[currentBitmapIndex], m, null);
+				
+			}	
+		}
+	} 
 
 }

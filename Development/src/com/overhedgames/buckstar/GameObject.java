@@ -10,11 +10,11 @@ import android.graphics.Point;
 
 public class GameObject {
 	private static final int DEF_ANIMATION_FPS = 5;
-	private Point currentLocation;
-	private Point targetLocation;
+	protected Point currentLocation;
+	protected Point targetLocation;
 	
 	protected Bitmap[] animationBitmaps;
-	private int currentBitmapIndex;
+	protected int currentBitmapIndex;
 	private Boolean isAnimating;
 		
 	private int framePeriod;
@@ -89,7 +89,8 @@ public class GameObject {
 				//		currentLocation.x - (animationBitmaps[currentBitmapIndex].getWidth() / 2),
 					//	currentLocation.y - (animationBitmaps[currentBitmapIndex].getHeight() / 2),
 						//null);
-			canvas.drawBitmap(animationBitmaps[currentBitmapIndex], currentLocation.x,  currentLocation.y, null);
+			
+			canvas.drawBitmap(animationBitmaps[currentBitmapIndex], currentLocation.x,  currentLocation.y, null);					
 		}
 	}
 	

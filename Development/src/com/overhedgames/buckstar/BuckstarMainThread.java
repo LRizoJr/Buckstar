@@ -83,6 +83,8 @@ public class BuckstarMainThread extends Thread {
 			sleepTime += (int) BuckstarMainThread.FRAME_PERIOD;
 			framesSkipped++;
 		}
+		Long tDif = System.currentTimeMillis() - beginTime;
+		//eLog.d(BuckstarMainThread.TAG, "Time diff: " + tDif.toString());
 	}
 
 }
